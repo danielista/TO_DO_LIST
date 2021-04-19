@@ -15,6 +15,31 @@ public class Task {
     }
 
     private String name;
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
     private int priority;
 
     public Task(String name, int priority, boolean done, Date date, Double price) {
@@ -52,4 +77,14 @@ public class Task {
 
     private Double price;
 
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", priority=" + priority +
+                ", done=" + done +
+                ", date=" + date + (price>=0 ? ", price=" + price:" ");
+
+    }
 }
