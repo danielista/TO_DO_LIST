@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * @author Daniel
  */
-public interface Mongo {
+public interface Mongosdatabase {
     public void insertTask(Task task);
 
     //nastaví hodnotu tasku na TRUE
@@ -21,7 +21,7 @@ public interface Mongo {
     // only not-completed tasks
     public List<Task> getAllTasks(boolean done);
     // task due PRIORITY
-    public List<Task> getAllTasksByPriority();
+    public List<Task> getAllTasksByPriority(int priority);
     // task by NAME of task
     public List<Task> getTaskByName(String name);
     // by date
