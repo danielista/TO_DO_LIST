@@ -22,7 +22,7 @@ import java.util.List;
 import static com.mongodb.client.model.Filters.eq;
 
 
-public class MongoImplementation implements Mongosdatabase {
+public class MongoImplementation implements Mongosdatabase, MongoJSON {
 
     // dbname: tskmngr
     // collection: tasks
@@ -261,5 +261,30 @@ public class MongoImplementation implements Mongosdatabase {
         MongoCollection<Document> collec = database.getCollection("tasks");
 
         collec.deleteMany(new Document().append("done", true));
+    }
+
+    @Override
+    public void insertTaskJSON(JSONObject task) {
+        if(task==null){
+            return;
+        }
+        Document doc = Document.parse( task.toString() );
+        try{
+            MongoClient mongoClient = new MongoClient();
+            MongoDatabase database = mongoClient.getDatabase("tskmngr");
+            database.getCollection("tasks").insertOne(doc);
+
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public JSONObject getAllTasksInJSON() {
+        MongoClient mongoClient = new MongoClient();
+        MongoDatabase database = mongoClient.getDatabase("testovanie");
+        MongoCollection<Document> collec = database.getCollection("tasks");
+        JSONObject collection = (JSONObject) collec;
+        return collection;
     }
 }
